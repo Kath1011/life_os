@@ -65,9 +65,15 @@ You are focusing on Android, so this is the working loop:
 
 You can keep other platform folders in the repo, but day-to-day development and release can stay Android-only.
 
+## Current Feature Mapping
+
+1. FR1 emergency access: `lib/features/emergency` and `lib/features/home`.
+2. FR2 diagnostics logic: `lib/features/diagnostics`.
+3. FR3 inventory and utility tools: `lib/features/utilities`.
+4. FR4 routine scheduling: `lib/features/schedules`.
+
 ## Next Build Steps
 
-1. Move each FR area into dedicated feature folders under `lib/features`.
-2. Add local persistence (Hive/Isar/shared_preferences) behind service abstractions.
-3. Split `LifeOsController` into feature controllers once logic grows.
-4. Add widget and provider tests for emergency and safety-critical paths.
+1. Add local persistence (Hive/Isar/shared_preferences) behind service abstractions.
+2. Split `LifeOsController` into per-feature controllers once logic grows.
+3. Add widget and provider tests for emergency and safety-critical paths.
