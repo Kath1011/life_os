@@ -10,7 +10,9 @@ class OfflineBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF1F2A37),
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: const Color(0xFF2AC3DE).withValues(alpha: 0.4)),
+        border: Border.all(
+          color: const Color(0xFF2AC3DE).withValues(alpha: 0.4),
+        ),
       ),
       child: const Row(
         mainAxisSize: MainAxisSize.min,

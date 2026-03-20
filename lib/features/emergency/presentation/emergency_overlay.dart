@@ -27,7 +27,9 @@ class EmergencyOverlay extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
               ),
               const SizedBox(height: 8),
-              const Text('Select a crisis type and follow zero-scroll action steps:'),
+              const Text(
+                'Select a crisis type and follow zero-scroll action steps:',
+              ),
               const SizedBox(height: 10),
               const Wrap(
                 spacing: 8,

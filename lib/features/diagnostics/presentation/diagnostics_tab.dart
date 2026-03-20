@@ -3,19 +3,24 @@ import 'package:flutter/material.dart';
 class DiagnosticsTab extends StatelessWidget {
   const DiagnosticsTab({
     super.key,
-    required this.isCeilingLeak,
+    required this.activeDiagnosticNodeId,
     required this.safetyAcknowledged,
-    required this.onLeakOriginChanged,
+    required this.onNavigateNode,
     required this.onSafetyChanged,
   });
 
-  final bool isCeilingLeak;
+  final String? activeDiagnosticNodeId;
   final bool safetyAcknowledged;
-  final ValueChanged<bool> onLeakOriginChanged;
+  final ValueChanged<String> onNavigateNode;
   final ValueChanged<bool> onSafetyChanged;
+
+  static const String _underSinkNodeId = 'leak_under_sink';
+  static const String _fromCeilingNodeId = 'leak_from_ceiling';
 
   @override
   Widget build(BuildContext context) {
+    final nodeId = activeDiagnosticNodeId ?? _fromCeilingNodeId;
+    final isCeilingLeak = nodeId == _fromCeilingNodeId;
     final blocked = isCeilingLeak || !safetyAcknowledged;
 
     return Padding(
@@ -23,7 +28,10 @@ class DiagnosticsTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Leak Origin', style: TextStyle(fontWeight: FontWeight.bold)),
+          const Text(
+            'Leak Origin',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 8),
           SegmentedButton<bool>(
             segments: const [
@@ -32,7 +40,9 @@ class DiagnosticsTab extends StatelessWidget {
             ],
             selected: {isCeilingLeak},
             onSelectionChanged: (selection) {
-              onLeakOriginChanged(selection.first);
+              onNavigateNode(
+                selection.first ? _fromCeilingNodeId : _underSinkNodeId,
+              );
             },
           ),
           const SizedBox(height: 12),
