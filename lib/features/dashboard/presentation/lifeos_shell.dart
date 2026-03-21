@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:life_os/core/theme/emergency_theme.dart';
 import 'package:life_os/features/diagnostics/presentation/diagnostics_tab.dart';
 import 'package:life_os/features/emergency/presentation/emergency_screen.dart';
@@ -72,13 +73,17 @@ class _LifeOsShellState extends ConsumerState<LifeOsShell> {
     );
 
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
+        toolbarHeight: 32,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: const Text(
           'LifeOS',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
         ),
         actions: const [
-          Padding(padding: EdgeInsets.only(right: 12), child: OfflineBadge()),
+          Padding(padding: EdgeInsets.only(right: 10), child: OfflineBadge()),
         ],
       ),
       body: IndexedStack(
@@ -92,6 +97,10 @@ class _LifeOsShellState extends ConsumerState<LifeOsShell> {
         ],
       ),
       bottomNavigationBar: NavigationBar(
+        backgroundColor: const Color(0xFF040B25),
+        indicatorColor: const Color(0xFF0B1A3B),
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+        height: 66,
         selectedIndex: currentTabIndex,
         onDestinationSelected: (index) {
           controller.switchTab(index);
@@ -120,9 +129,9 @@ class _LifeOsShellState extends ConsumerState<LifeOsShell> {
         backgroundColor: const Color(0xFFE8383C),
         onPressed: controller.toggleEmergencyMode,
         icon: Icon(isEmergency ? Icons.close : Icons.warning_amber_rounded),
-        label: Text(isEmergency ? 'EXIT' : 'EMERGENCY'),
+        label: Text(isEmergency ? 'EXIT' : 'EMERGENCY', style: const TextStyle(fontSize: 10)),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
